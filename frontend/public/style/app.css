@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@layer components {
+  .menu li {
+    color: #64748b;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    background: linear-gradient(
+      45deg,
+      rgba(59, 130, 246, 0.1) 0%,
+      rgba(30, 58, 138, 0.05) 100%
+    );
+    z-index: 9;
+    height: 200%;
+    width: 60%;
+    right: -25%;
+    border-radius: 40%;
+    transform: rotate(-15deg);
+    top: -50%;
+    border-right: transparent;
+  }
+  .hero-title {
+    background: linear-gradient(135deg, #0f1419 0%, #1e3a8a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+}
