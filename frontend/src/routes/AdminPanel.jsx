@@ -4,7 +4,9 @@ import { useLoaderData } from "react-router-dom";
 import { useState, useEffect } from "react";
 export async function loader() {
   try {
-    const request = await fetch("http://127.0.0.1:8000/appointment/");
+    const request = await fetch(
+      "https://automation-bot.up.railway.app/appointment/"
+    );
     const response = await request.json();
     return response;
   } catch (e) {

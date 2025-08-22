@@ -45,7 +45,7 @@ export default function BookingForm() {
     };
 
     try {
-      const request = await fetch("http://127.0.0.1:8000/book-appointment/", {
+      const request = await fetch("https://automation-bot.up.railway.app/book-appointment/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
