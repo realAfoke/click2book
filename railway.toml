@@ -1,0 +1,7 @@
+[build]
+# Tell Railway that the app lives inside the backend folder
+root = "backend"
+
+[deploy]
+# Command to start Django with Gunicorn
+start = "gunicorn backend.wsgi --log-file -"
