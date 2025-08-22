@@ -12,9 +12,9 @@ class GoogleCalendarService:
 
         self.calendar_id=settings.CALENDAR_ID
     
-    def create_appointment_event(self,client_name,client_phone,appointment_time,purpose):
+    def create_appointment_event(self,client_name,client_phone,appointment_time,duration,purpose):
 
-        end_time=appointment_time + timedelta(hours=1)
+        end_time=appointment_time + duration
 
         #create appointment
         event={
