@@ -34,8 +34,8 @@ SECRET_KEY = 'django-insecure-ov%*#9a8!@32s$$94w2i-e7s3_5n+dqr5=mx!53%(567yg1#s$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
-# ALLOWED_HOSTS = ["https://automation-bot.up.railway.app"]
+# ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://automation-bot.up.railway.app"]
 
 
 # Application definition
@@ -65,8 +65,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'setting.urls'
-CORS_ALLOW_ALL_ORIGINS=True
-CORS_ALLOW_CREDENTIALS=True
+CORS_ALLOW_ALL_ORIGINS=["https://bot-automation.netlify.app/"]
+# CORS_ALLOW_CREDENTIALS=True
 
 TEMPLATES = [
     {
