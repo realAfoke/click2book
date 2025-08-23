@@ -65,7 +65,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'setting.urls'
-CORS_ALLOWED_ORIGINS=["https://bot-automation.netlify.app/"]
+CORS_ALLOWED_ORIGINS=["https://bot-automation.netlify.app"]
 # CORS_ALLOW_CREDENTIALS=True
 
 TEMPLATES = [
