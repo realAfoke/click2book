@@ -45,13 +45,16 @@ export default function BookingForm() {
     };
 
     try {
-      const request = await fetch("https://automation-bot.up.railway.app/book-appointment/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(appointment),
-      });
+      const request = await fetch(
+        `${process.env.REACT_APP_API_URL}/book-appointment/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(appointment),
+        }
+      );
       if (!request.ok) {
         const err = await request.json();
         console.log(err);

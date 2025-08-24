@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 export async function loader() {
   try {
     const request = await fetch(
-      "https://automation-bot.up.railway.app/appointment/"
+      `${process.env.REACT_APP_API_URL}/appointment/`
     );
     const response = await request.json();
     return response;
