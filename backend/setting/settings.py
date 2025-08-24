@@ -32,10 +32,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ov%*#9a8!@32s$$94w2i-e7s3_5n+dqr5=mx!53%(567yg1#s$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG',default=False,cast=bool)
+
+
 
 # ALLOWED_HOSTS = ["*"]
-ALLOWED_HOSTS = ["automation-bot.up.railway.app"]
 
 
 # Application definition
@@ -89,18 +90,22 @@ WSGI_APPLICATION = 'setting.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME':DATABASE,
-#         'USER':USER,
-#         'PASSWORD':PASSWORD,
-#         'HOST':HOST
-#     }
-# }
+if DEBUG:
+    ALLOWED_HOSTS=["localhost","127.0.0.1"]
+    CORS_ALLOWED_ORIGINS=True
 
-
-DATABASES = {
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':DATABASE,
+        'USER':USER,
+        'PASSWORD':PASSWORD,
+        'HOST':HOST
+    }
+}
+else:
+    ALLOWED_HOSTS = ["automation-bot.up.railway.app"]
+    DATABASES = {
     "default": dj_database_url.config(
         default=config("DATABASE_URL")
     )
