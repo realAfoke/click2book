@@ -4,9 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import { useState, useEffect } from "react";
 export async function loader() {
   try {
-    const request = await fetch(
-      `${process.env.REACT_APP_API_URL}/appointment/`
-    );
+    const request = await fetch(`${import.meta.env.VITE_API_URL}/appointment/`);
     const response = await request.json();
     return response;
   } catch (e) {
@@ -24,7 +22,7 @@ export default function AdminPanel() {
     let searchParam = new RegExp(searchParams.trim(), "i");
     let results = [];
 
-    for (let x = 0; x < head.length; x++) {
+    for (let x = 0; x < head?.length; x++) {
       if (searchParam.test(head[x].owner.name.trim())) {
         results.push(head[x]);
       }

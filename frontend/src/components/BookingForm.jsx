@@ -46,7 +46,7 @@ export default function BookingForm() {
 
     try {
       const request = await fetch(
-        `${process.env.REACT_APP_API_URL}/book-appointment/`,
+        `${import.meta.env.VITE_API_URL}/book-appointment/`,
         {
           method: "POST",
           headers: {
