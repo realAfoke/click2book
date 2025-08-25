@@ -66,7 +66,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'setting.urls'
-CORS_ALLOWED_ORIGINS=["https://bot-automation.netlify.app"]
 # CORS_ALLOW_CREDENTIALS=True
 
 TEMPLATES = [
@@ -92,7 +91,7 @@ WSGI_APPLICATION = 'setting.wsgi.application'
 
 if DEBUG:
     ALLOWED_HOSTS=["localhost","127.0.0.1"]
-    CORS_ALLOWED_ORIGINS=True
+    CORS_ALLOW_ALL_ORIGINS=True
 
     DATABASES = {
     'default': {
@@ -105,6 +104,7 @@ if DEBUG:
 }
 else:
     ALLOWED_HOSTS = ["automation-bot.up.railway.app"]
+    CORS_ALLOWED_ORIGINS=["https://bot-automation.netlify.app"]
     DATABASES = {
     "default": dj_database_url.config(
         default=config("DATABASE_URL")
