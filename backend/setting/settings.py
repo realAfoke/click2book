@@ -104,7 +104,7 @@ if DEBUG:
 }
 else:
     ALLOWED_HOSTS = ["automation-bot.up.railway.app"]
-    CORS_ALLOWED_ORIGINS=["https://bot-automation.netlify.app"]
+    CORS_ALLOWED_ORIGINS=["https://click2book.netlify.app"]
     DATABASES = {
     "default": dj_database_url.config(
         default=config("DATABASE_URL")
