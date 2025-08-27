@@ -104,9 +104,9 @@ if DEBUG:
     }
 }
 else:
-    GOOGLE_CALENDAR_CREDENTIALS = json.loads(GOOGLE_CALENDAR_CREDENTIALS)
     ALLOWED_HOSTS = ["automation-bot.up.railway.app"]
     CORS_ALLOWED_ORIGINS=["https://click2book.netlify.app"]
+    GOOGLE_CALENDAR_CREDENTIALS = json.loads(GOOGLE_CALENDAR_CREDENTIALS)
     DATABASES = {
     "default": dj_database_url.config(
         default=config("DATABASE_URL")
