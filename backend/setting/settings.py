@@ -106,7 +106,6 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = ["automation-bot.up.railway.app"]
     CORS_ALLOWED_ORIGINS=["https://click2book.netlify.app"]
-    GOOGLE_CALENDAR_CREDENTIALS = json.loads(GOOGLE_CALENDAR_CREDENTIALS)
     DATABASES = {
     "default": dj_database_url.config(
         default=config("DATABASE_URL")
@@ -165,6 +164,10 @@ AUTH_USER_MODEL='main.User'
 
 #Gooogle Calendar settigns
 GOOGLE_CALENDAR_CREDENTIALS=config('GOOGLE_CALENDAR_CREDENTIALS')
+# print(GOOGLE_CALENDAR_CREDENTIALS)
+if not DEBUG:
+    GOOGLE_CALENDAR_CREDENTIALS = json.loads(GOOGLE_CALENDAR_CREDENTIALS)
+
 CALENDAR_ID=config('CALENDAR_ID')
 
 #Twilio messaging/call setting
