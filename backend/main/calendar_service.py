@@ -2,29 +2,20 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from django.conf import settings
 from datetime import timedelta
-import json
 import os
+import json
 
 class GoogleCalendarService:
     scopes=["https://www.googleapis.com/auth/calendar"]
+    creds_value=settings.GOOGLE_CALENDAR_CREDENTIALS
     def __init__(self):
-       
-        creds_value = settings.GOOGLE_CALENDAR_CREDENTIALS
-
-        # If it looks like JSON string → parse
-        if isinstance(creds_value, str):
-            creds_dict = json.loads(creds_value)
-            self.credentials = service_account.Credentials.from_service_account_info(
-                creds_dict, scopes=self.scopes
-            )
-        elif isinstance(creds_value, dict):
-            # If Django already parsed env to dict (rare but possible)
-            self.credentials = service_account.Credentials.from_service_account_info(
-                creds_value, scopes=self.scopes
-            )
+        if os.path.isfile(self.creds_value):
+            self.credentials=service_account.Credentials.from_service_account_file(self.creds_value,scopes=self.scopes)
         else:
-            raise ValueError("Invalid GOOGLE_CALENDAR_CREDENTIALS format")
-
+            cred_dict=json.loads(self.creds_value)
+            if "private_key" in cred_dict:
+                cred_dict['private_key']=cred_dict['private_key'].replace('\\n','\n')
+            self.credentials=service_account.Credentials.from_service_account_info(cred_dict,scopes=self.scopes)
         self .service=build('calendar','v3',credentials=self.credentials)
 
         self.calendar_id=settings.CALENDAR_ID
