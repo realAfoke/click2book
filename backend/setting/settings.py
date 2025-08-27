@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+import json
 import dj_database_url
 
 USER=config('USER')
@@ -162,6 +163,7 @@ AUTH_USER_MODEL='main.User'
 
 #Gooogle Calendar settigns
 GOOGLE_CALENDAR_CREDENTIALS=config('GOOGLE_CALENDAR_CREDENTIALS')
+GOOGLE_CALENDAR_CREDENTIALS = json.loads(GOOGLE_CALENDAR_CREDENTIALS)
 CALENDAR_ID=config('CALENDAR_ID')
 
 #Twilio messaging/call setting
