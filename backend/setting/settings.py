@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os
+import dj_database_url
 
 USER=config('USER')
 DATABASE=config('DATABASE')
@@ -30,9 +32,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ov%*#9a8!@32s$$94w2i-e7s3_5n+dqr5=mx!53%(567yg1#s$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG',default=False,cast=bool)
 
-ALLOWED_HOSTS = []
+
+
+# ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -50,6 +54,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,6 +66,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'setting.urls'
+# CORS_ALLOW_CREDENTIALS=True
 
 TEMPLATES = [
     {
@@ -82,7 +89,11 @@ WSGI_APPLICATION = 'setting.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
+if DEBUG:
+    ALLOWED_HOSTS=["localhost","127.0.0.1"]
+    CORS_ALLOW_ALL_ORIGINS=True
+
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME':DATABASE,
@@ -90,6 +101,14 @@ DATABASES = {
         'PASSWORD':PASSWORD,
         'HOST':HOST
     }
+}
+else:
+    ALLOWED_HOSTS = ["automation-bot.up.railway.app"]
+    CORS_ALLOWED_ORIGINS=["https://bot-automation.netlify.app"]
+    DATABASES = {
+    "default": dj_database_url.config(
+        default=config("DATABASE_URL")
+    )
 }
 
 
@@ -149,3 +168,8 @@ CALENDAR_ID=config('CALENDAR_ID')
 TWILIO_ACCOUNT_SID=config('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN=config('TWILIO_AUTH_TOKEN')
 TWILIO_PHONE_NUMBER=config('TWILIO_PHONE_NUMBER')
+
+
+# Static files
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")

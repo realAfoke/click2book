@@ -58,9 +58,11 @@ class Client(models.Model):
         db_table='client'
 
 class Consultants(models.Model):
+    service=models.CharField(max_length=200,blank=True,null=True)
     purpose=models.TextField()
     status=models.CharField(max_length=100)
     consult_time=models.DateTimeField()
+    # duration=models.DurationField(null=True,blank=True)
     owner=models.ForeignKey(Client,related_name='appointments',on_delete=models.CASCADE)
 
     def __str__(self):

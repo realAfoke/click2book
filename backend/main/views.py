@@ -28,4 +28,3 @@ class AppointmentView(generics.ListCreateAPIView):
 class BookAppointmentView(generics.CreateAPIView):
     queryset=Consultants.objects.all()
     serializer_class=BookingSerializer
-j
