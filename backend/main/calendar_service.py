@@ -9,11 +9,21 @@ class GoogleCalendarService:
     scopes=["https://www.googleapis.com/auth/calendar"]
     def __init__(self):
        
-        if os.path.isfile(settings.GOOGLE_CALENDAR_CREDENTIALS):
-             self.credentials=service_account.Credentials.from_service_account_file(settings.GOOGLE_CALENDAR_CREDENTIALS,scopes=self.scopes)
+        creds_value = settings.GOOGLE_CALENDAR_CREDENTIALS
+
+        # If it looks like JSON string → parse
+        if isinstance(creds_value, str):
+            creds_dict = json.loads(creds_value)
+            self.credentials = service_account.Credentials.from_service_account_info(
+                creds_dict, scopes=self.scopes
+            )
+        elif isinstance(creds_value, dict):
+            # If Django already parsed env to dict (rare but possible)
+            self.credentials = service_account.Credentials.from_service_account_info(
+                creds_value, scopes=self.scopes
+            )
         else:
-            creds_dict=json.loads(settings.GOOGLE_CALENDAR_CREDENTIALS)
-            self.credentials=service_account.Credentials.from_service_account_info(creds_dict,scopes=self.scopes)
+            raise ValueError("Invalid GOOGLE_CALENDAR_CREDENTIALS format")
 
         self .service=build('calendar','v3',credentials=self.credentials)
 
