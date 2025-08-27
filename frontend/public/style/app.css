@@ -27,6 +27,7 @@
     top: -80%;
     border-right: transparent;
   }
+  
   .hero-title {
     background: linear-gradient(135deg, #0f1419 0%, #1e3a8a 100%);
     -webkit-background-clip: text;

@@ -1,25 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import DivListRow from "./DivListRow";
 import TableListRow from "./TableListRow";
 import DropDownSelect from "./DropDownSelect";
+import AppointmentDetail from "./AppointmentDetail";
 
 export default function MainAdminBoard({ data }) {
   const [optionDisplay, setOptionDisplay] = useState(0);
+  const [apptDetail, setApptDetail] = useState(false);
+  const appointmentTag = useRef(null);
   function toggleOption(value) {
     setOptionDisplay(value);
   }
   useEffect(() => {
     window.addEventListener("click", () => {
       setOptionDisplay(0);
+      setApptDetail(false);
     });
   });
+
+  function log(email) {
+    const detail = data.find((app) => app.owner.email === email);
+    setApptDetail(detail);
+  }
   const active = data.filter((obj) => obj.status === "booked");
   return (
     <div className="bg-[#fafafa] h-[100vh]">
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] xxs:gap-[1.5rem] gap-[0.3rem] py-[1.5rem] xxs:mx-[2rem] mb-[1rem] mx-[1rem] *:border-1 *:border-gray-200">
-        <div className="p-[2rem] px-[1.5rem] my-5 shadow flex rounded-[10px] justify-between bg-white">
+      {apptDetail && <AppointmentDetail detail={apptDetail} />}
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] xxs:gap-[1.5rem] gap-[0.3rem] py-[0.5rem] pt-[4rem] xxs:mx-[2rem] mb-[0.5rem] mx-[1rem] *:border-1 *:border-gray-200">
+        <div
+          className="p-[2rem] px-[1.5rem] my-5 shadow flex rounded-[10px] justify-between bg-white"
+          id="dashboard"
+        >
           <div className="flex flex-col justify-between gap-[2rem]">
-            <h3 className="text-[0.857rem] font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] font-[600] text-[#6e6d6d] tracking-[0.15px] uppercase">
+            <h3 className="text-[0.857rem] font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] font-[600] text-[#6d6d6d] tracking-[0.15px] uppercase">
               Total Appointment
             </h3>
 
@@ -42,7 +55,7 @@ export default function MainAdminBoard({ data }) {
 
             <div className="flex flex-col  gap-[0.5rem]">
               <span className="text-[2rem] font-[700] text-[#171717]">
-                $42,850
+                {`$${data.length * 500}`}
               </span>
               <span className="text-[#10b981] text-[0.875rem] font-[600]">
                 8% from last month
@@ -84,7 +97,10 @@ export default function MainAdminBoard({ data }) {
           <span className="w-[40px] h-[40px] block bg-gradient-to-b from-[#8b5cf6] to-[#a855f7] rounded-[10px] mt-[-12px]"></span>
         </div>
       </div>
-      <div className=" *:border-b *:border-gray-300 xxs:mx-[2rem] mx-[1rem] shadow border-1 border-gray-100 rounded-[15px]">
+      <div
+        className=" *:border-b *:border-gray-300 xxs:mx-[2rem] mx-[1rem] shadow border-1 border-gray-100 rounded-[15px]"
+        id="appointment"
+      >
         <h3 className="text-[1.125rem] text-[#171717] font-[600]  p-[2rem]">
           Recent Appointment
         </h3>
@@ -132,7 +148,7 @@ export default function MainAdminBoard({ data }) {
           "
             >
               {data.map((name) => (
-                <DivListRow key={name.id} name={name.owner} />
+                <DivListRow key={name.id} name={name.owner} onClick={log} />
               ))}
             </div>
           </div>
@@ -148,7 +164,12 @@ export default function MainAdminBoard({ data }) {
               </thead>
               <tbody>
                 {data.map((detail) => (
-                  <TableListRow key={detail.id} detail={detail} />
+                  <TableListRow
+                    key={detail.id}
+                    detail={detail}
+                    name={detail.owner}
+                    onClick={log}
+                  />
                 ))}
               </tbody>
             </table>

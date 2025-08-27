@@ -4,11 +4,11 @@ export default function Menu() {
   return (
     <>
       <header className="fixed shadow w-full p-6 xs:px-[5rem] xs:py-3 xs:items-center flex justify-between z-40 bg-white font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif]">
-        <div className="text-[clamp(1.5rem,4vw,2rem)] font-[700] text-[#3b82f6]">
+        <div className="text-[clamp(1rem,2vw,2rem)] font-[700] text-[#3b82f6]">
           JusticeStand
         </div>
         <ul
-          className={`*:text-[#64748b] text-[clamp(1rem,2vw,1rem)] bg-white flex flex-col  xs:flex xs:flex-row xs:justify-between xs:w-auto xs:static xs:items-center xs:gap-[4rem] xs:shadow-none  menu absolute left-0 top-[100%] shadow-lg w-full p-3 gap-[1.5rem] ${
+          className={`*:text-[#64748b] text-[0.875rem] bg-white flex flex-col  xs:flex xs:flex-row xs:justify-between xs:w-auto xs:static xs:items-center xs:gap-[4rem] xs:shadow-none  menu absolute left-0 top-[100%] shadow-lg w-full p-3 gap-[1.5rem] ${
             showMenu ? "block" : "hidden"
           }`}
         >

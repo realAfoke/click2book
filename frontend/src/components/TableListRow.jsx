@@ -1,18 +1,37 @@
-export default function TableListRow({ detail }) {
+import AppointmentDetail from "./AppointmentDetail";
+import { useState, useRef, useEffect } from "react";
+export default function TableListRow({ detail, onClick, name }) {
+  const date = new Date(detail.consult_time);
   return (
     <>
-      <tr className="*:text-center *:border-b-1 *:border-gray-300 *:text-[#737373] *:text-[0.75rem]">
+      <tr
+        className="*:text-center *:border-b-1 *:border-gray-300 *:text-[#737373] *:text-[0.75rem]"
+        data-email={name.email}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick(e.currentTarget.dataset.email);
+        }}
+      >
         <td>
-          {/* <div>Coporate law consultation</div> */}
           <div>{detail.service}</div>
         </td>
         <td>
-          {/* <div>Booked</div> */}
-          <div>{detail.status}</div>
+          <div
+            className={`${
+              detail.status === "booked"
+                ? "text-yellow-500"
+                : detail.status === "cancelled"
+                ? "text-red-500"
+                : detail.status === "confrimed"
+                ? "text-green-500"
+                : "text-[#737373]"
+            }`}
+          >
+            {detail.status}
+          </div>
         </td>
         <td>
-          {/* <div>Today 2:00PM Aug 18,2025</div> */}
-          <div>{detail.consult_time}</div>
+          <div>{date.toDateString()}</div>
         </td>
         <td className="relative overflow-auto">
           <div className="absolute top-[-15px] w-full flex flex-col *:py-1 text-white">

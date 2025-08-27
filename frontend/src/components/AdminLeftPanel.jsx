@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 export default function AdminLeftPanel({ search, onChange }) {
   const [showAdminMenu, setShowAdminMenu] = useState(false);
 
   return (
     <>
-      <header className="bg-white flex p-4 py-2 shadow justify-between relative items-center">
+      <header className="bg-white flex p-4 py-2 shadow justify-between items-center fixed to-0% w-full z-[9999]">
         <h3 className="text-[clamp(1rem,2vw,2rem)] font-[700] font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] text-[#3b82f6]">
           JusticeStand
         </h3>
@@ -12,12 +13,19 @@ export default function AdminLeftPanel({ search, onChange }) {
           <ul
             className={`${
               showAdminMenu ? "flex" : "hidden"
-            } absolute bg-[#3b82f6] left-0 top-[100%] w-full flex-col *:p-2 text-white *:text-[clamp(1rem,3vw,1.2rem)] font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] xxs:flex-row xxs:flex xxs:static xxs:gap-[2rem] xxs:bg-white xxs:text-[#64748b]`}
+            } absolute bg-[#3b82f6] left-0 top-[100%] w-full flex-col *:p-2 text-white *:text-[0.875rem] font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] xxs:flex-row xxs:flex xxs:static xxs:gap-[2rem] xxs:bg-white xxs:text-[#64748b]`}
           >
-            <li>Dashboard</li>
-            <li>Appointment</li>
-            <li>Cient</li>
+            <li>
+              <a href="#dashboard">Daahboard</a>
+            </li>
+            <li>
+              <a href="#appointment">Appointment</a>
+            </li>
+            <li>Client</li>
             <li>Profile</li>
+            <li>
+              <Link to="/">Book Appointment</Link>
+            </li>
           </ul>
           <div>
             <input

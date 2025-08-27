@@ -16,7 +16,7 @@ export default function DropDownSelect({
         {label}
       </label>
       <div
-        className="font-['Inter'] *:text-[1rem] flex  flex-col justify-center border-1 border-[#e2e8f0] rounded-[5px] relative"
+        className="font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] *:text-[0.8rem] flex  flex-col justify-center border-1 border-[#e2e8f0] rounded-[5px] relative z-[1]"
         onClick={(e) => {
           e.stopPropagation();
           click(label);
@@ -28,7 +28,7 @@ export default function DropDownSelect({
         <div
           className={`${
             optionDisplay === label ? "block" : "hidden"
-          } absolute w-full top-[100%] left-0 bg-white rounded-[5px] *:p-2 *:hover:bg-[#3b82f6] *:hover:text-white`}
+          } absolute w-full top-[100%] left-0 bg-white shadow rounded-b-[5px] *:p-2 *:hover:bg-[#3b82f6] *:hover:text-white`}
           datatype="option"
           onClick={(e) => {
             setSelectedOption(e.target.textContent);
@@ -38,7 +38,12 @@ export default function DropDownSelect({
           }}
         >
           {options.map((option) => (
-            <div key={option}>{option}</div>
+            <div
+              key={option}
+              className="text-[0.8rem] font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] text-[#6d6d6d]"
+            >
+              {option}
+            </div>
           ))}
         </div>
       </div>

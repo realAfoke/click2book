@@ -34,11 +34,11 @@ class BookingSerializer(serializers.Serializer):
            
         
             # Create Google Calendar Event
-            # calender_service=GoogleCalendarService()
-            # calendar_event=calender_service.create_appointment_event(
-            #     client_name=client.name,client_phone=client.phone_number,appointment_time=validated_data['consult_time'],purpose=validated_data['purpose']
-            #     )
-            # print(f"✅ Calendar event created: {calendar_event.get('htmlLink')}")
+            calender_service=GoogleCalendarService()
+            calendar_event=calender_service.create_appointment_event(
+                client_name=client.name,client_phone=client.phone_number,appointment_time=validated_data['consult_time'],purpose=validated_data['purpose']
+                )
+            print(f"✅ Calendar event created: {calendar_event.get('htmlLink')}")
             
             
             return {'email':client.email,'name':client.name,'phone_number':client.phone_number,'service':validated_data['service'],'purpose':appointment.purpose,'consult_time':appointment.consult_time}

@@ -57,16 +57,12 @@ export default function BookingForm() {
       );
       if (!request.ok) {
         const err = await request.json();
-        console.log(err);
         throw "something went wrong";
       }
       const resp = await request.json();
-      console.log("i am here");
       setLoading(false);
-      console.log("i am here now");
       setIsSent(true);
       setTimeout(() => {
-        console.log("about to fire set sent");
         setIsSent(false);
       }, 3000);
     } catch (e) {
@@ -78,7 +74,7 @@ export default function BookingForm() {
     <div className="">
       <Menu />
       <main>
-        <div className="h-[85px]"></div>
+        <div className="h-[70px]"></div>
         <div className="hero bg-gradient-to-b from-[#f8fafc] to-[#eff6ff]  relative overflow-hidden   py-23 px-5 flex flex-col items-center">
           <div className="flex flex-col items-center gap-[2rem] md:max-w-[calc(100%-30%)]">
             <h5
@@ -529,7 +525,10 @@ export default function BookingForm() {
           </div>
         </div>
       </main>
-      <footer className="bg-[#0f1419] text-white pb-[1rem] pt-[4rem] px-5">
+      <footer
+        className="bg-[#0f1419] text-white pb-[1rem] pt-[4rem] px-5"
+        id="contact"
+      >
         <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-[3rem]">
           <div className="flex-1">
             <h3 className="text-[1.5rem] font-[500]">JusticeStand</h3>
