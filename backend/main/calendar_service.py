@@ -12,8 +12,8 @@ class GoogleCalendarService:
         if os.path.isfile(settings.GOOGLE_CALENDAR_CREDENTIALS):
              self.credentials=service_account.Credentials.from_service_account_file(settings.GOOGLE_CALENDAR_CREDENTIALS,scopes=self.scopes)
         else:
-            creds_dict=json.load(settings.GOOGLE_CALENDAR_CREDENTIALS)
-            self.credentiala=service_account.Credentials.from_service_account_file(creds_dict,scopes=self.scopes)
+            creds_dict=json.loads(settings.GOOGLE_CALENDAR_CREDENTIALS)
+            self.credentials=service_account.Credentials.from_service_account_info(creds_dict,scopes=self.scopes)
 
         self .service=build('calendar','v3',credentials=self.credentials)
 
