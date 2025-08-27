@@ -57,7 +57,7 @@ export default function BookingForm() {
       );
       if (!request.ok) {
         const err = await request.json();
-        throw "something went wrong";
+        throw err;
       }
       const resp = await request.json();
       setLoading(false);
