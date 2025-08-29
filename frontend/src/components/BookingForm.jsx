@@ -10,13 +10,15 @@ import "../../public/style/app.css";
 export default function BookingForm() {
   const [loading, setLoading] = useState(false);
   const [hideOptions, setHideOptions] = useState(true);
-  const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [date, setDate] = useState("");
-  const [service, setService] = useState("");
-  const [duration, setDuration] = useState("");
-  const [email, setEmail] = useState("");
-  const [summary, setSummary] = useState("");
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    date: "",
+    service: "",
+    email: "",
+    summary: "",
+  });
+
   const [disabled, setDisabled] = useState(false);
   const [isSent, setIsSent] = useState(false);
   useEffect(() => {
@@ -35,13 +37,12 @@ export default function BookingForm() {
 
   async function submit() {
     let appointment = {
-      name: fullName,
-      email: email,
-      service: service,
-      phone_number: phone,
-      duration: duration,
-      consult_time: date,
-      purpose: summary,
+      name: formData.fullName,
+      email: formData.email,
+      service: formData.service,
+      phone_number: formData.phone,
+      consult_time: formData.date,
+      purpose: formData.summary,
     };
 
     try {
@@ -214,16 +215,20 @@ export default function BookingForm() {
                   }}
                 >
                   <div className="text-[14px]">
-                    {service || "Select your legal need"}
+                    {formData.service || "Select your legal need"}
                   </div>
                   <div
                     className={`${
                       hideOptions ? "hidden" : "block"
                     } absolute w-full top-12 left-0 bg-white rounded-[10px] border-1 border-gray-600 *:p-3 *:hover:bg-[#3b82f6] *:hover:text-white`}
                     datatype="option"
-                    onClick={(e) => {
-                      setService(e.target.textContent);
-                    }}
+                    onClick={(e) =>
+                      // console.log(e.target.textContent)
+                      setFormData({
+                        ...formData,
+                        service: e.target.textContent,
+                      })
+                    }
                   >
                     <div>Corporate Law</div>
                     <div>Employment Law</div>
@@ -247,8 +252,13 @@ export default function BookingForm() {
                   type="text"
                   name="fullName"
                   id="fullName"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.currentTarget.value)}
+                  value={formData.fullName}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      fullName: e.currentTarget.value,
+                    })
+                  }
                   placeholder="Enter your full name"
                   className="tracking-widest border-1 border-[#e2e8f0] w-full p-3 rounded-[10px] group-focus:ring-2 group-focus:ring-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a] transition-all duration-300 ease-in-out focus:outline-none"
                 />
@@ -264,8 +274,13 @@ export default function BookingForm() {
                   type="email"
                   name="email"
                   id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.currentTarget.value)}
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      email: e.currentTarget.value,
+                    })
+                  }
                   placeholder="your email@company.com"
                   className="tracking-widest border-1 border-[#e2e8f0] w-full p-3 rounded-[10px] group-focus:ring-2 group-focus:ring-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a] transition-all duration-300 ease-in-out focus:outline-none"
                 />
@@ -281,8 +296,13 @@ export default function BookingForm() {
                   type="tel"
                   name="phone"
                   id="phoneNumber"
-                  value={phone}
-                  onChange={(e) => setPhone(e.currentTarget.value)}
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      phone: e.currentTarget.value,
+                    })
+                  }
                   placeholder="+234 (0000)-(0000)-(000)"
                   className="tracking-widest border-1 border-[#e2e8f0] w-full p-3 rounded-[10px] group-focus:ring-2 group-focus:ring-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a] transition-all duration-300 ease-in-out focus:outline-none"
                 />
@@ -298,8 +318,13 @@ export default function BookingForm() {
                   type="date"
                   name="date"
                   id="date"
-                  value={date}
-                  onChange={(e) => setDate(e.currentTarget.value)}
+                  value={formData.date}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      date: e.currentTarget.value,
+                    })
+                  }
                   className="tracking-widest border-1 border-[#e2e8f0] w-full p-3 rounded-[10px] group-focus:ring-2 group-focus:ring-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a] transition-all duration-300 ease-in-out focus:outline-none"
                 />
               </div>
@@ -331,7 +356,13 @@ export default function BookingForm() {
                 <textarea
                   placeholder="Please provide us a brief view of your legal matter. . ."
                   className="tracking-widest border-1 border-[#e2e8f0] w-full p-3 px-5 rounded-[10px] group-focus:ring-2 group-focus:ring-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a] transition-all duration-300 ease-in-out focus:outline-none h-[100px]"
-                  onChange={(e) => setSummary(e.currentTarget.value)}
+                  value={formData.summary}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      summary: e.currentTarget.value,
+                    })
+                  }
                 ></textarea>
               </div>
               <button
@@ -344,18 +375,26 @@ export default function BookingForm() {
                 disabled={disabled}
                 onClick={(e) => {
                   if (
-                    email === "" ||
-                    phone === " " ||
-                    fullName === "" ||
-                    service === " " ||
-                    summary === " " ||
-                    date === " "
+                    formData.email === "" ||
+                    formData.phone === " " ||
+                    formData.fullName === "" ||
+                    formData.service === " " ||
+                    formData.summary === " " ||
+                    formData.date === " "
                   ) {
                     setDisabled(true);
                     return;
                   }
                   setLoading(true);
                   submit();
+                  setFormData({
+                    fullName: "",
+                    phone: "",
+                    date: "",
+                    service: "",
+                    email: "",
+                    summary: "",
+                  });
                 }}
               >
                 {loading
