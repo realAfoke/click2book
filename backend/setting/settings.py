@@ -19,10 +19,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-USER=config('USER')
-DATABASE=config('DATABASE')
-HOST=config('HOST')
-PASSWORD=config('PASSWORD')
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -100,10 +97,10 @@ if DEBUG:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':DATABASE,
-        'USER':USER,
-        'PASSWORD':PASSWORD,
-        'HOST':HOST
+        'NAME':config('DATABASE'),
+        'USER':config('USER'),
+        'PASSWORD':config('PASSWORD'),
+        'HOST':config('HOST')
     }
 }
 else:
