@@ -30,12 +30,14 @@ markdown-it-py==3.0.0
 mdurl==0.1.2
 multidict==6.6.3
 packaging==25.0
+pillow==11.3.0
 propcache==0.3.2
 proto-plus==1.26.1
 protobuf==6.31.1
 psycopg2-binary==2.9.10
 pyasn1==0.6.1
 pyasn1_modules==0.4.2
+pycryptodome==3.23.0
 Pygments==2.19.2
 PyJWT==2.9.0
 pyparsing==3.2.3
