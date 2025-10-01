@@ -18,7 +18,7 @@ class AppointmentView(generics.ListCreateAPIView):
     serializer_class=AppointmentSerializer
     
     def list(self,request,*args,**kwargs):
-        data=super().list(self,*args,**kwargs)
+        data=super().list(request,*args,**kwargs)
         print(data.data)
         return Response(data.data)
 

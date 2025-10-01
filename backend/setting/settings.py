@@ -105,7 +105,7 @@ if DEBUG:
     }
 }
 else:
-    ALLOWED_HOSTS = ["automation-bot.up.railway.app"]
+    ALLOWED_HOSTS = ["click2book.onrender.com"]
     CORS_ALLOWED_ORIGINS=["https://click2book.netlify.app"]
     DATABASES = {
     "default": dj_database_url.config(
