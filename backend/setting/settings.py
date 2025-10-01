@@ -14,6 +14,7 @@ from pathlib import Path
 from decouple import config
 import os
 import json
+import base64
 import dj_database_url
 from dotenv import load_dotenv
 
@@ -166,7 +167,7 @@ AUTH_USER_MODEL='main.User'
 GOOGLE_CALENDAR_CREDENTIALS=os.environ.get('GOOGLE_CALENDAR_CREDENTIALS')
 # print(GOOGLE_CALENDAR_CREDENTIALS)
 if not DEBUG:
-    GOOGLE_CALENDAR_CREDENTIALS = json.loads(GOOGLE_CALENDAR_CREDENTIALS)
+    GOOGLE_CALENDAR_CREDENTIALS = base64.b64decode(json.loads(GOOGLE_CALENDAR_CREDENTIALS))
 
 CALENDAR_ID=config('CALENDAR_ID')
 
