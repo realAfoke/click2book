@@ -17,10 +17,6 @@ class AppointmentView(generics.ListCreateAPIView):
     queryset=Consultants.objects.all()
     serializer_class=AppointmentSerializer
     
-    def list(self,request,*args,**kwargs):
-        data=super().list(request,*args,**kwargs)
-        print(data.data)
-        return Response(data.data)
 
 # class BookAppointmentView(APIView):
 #     def post(self,request):
