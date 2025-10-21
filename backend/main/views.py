@@ -12,15 +12,11 @@ class ListClient(generics.ListCreateAPIView):
     queryset=Client.objects.all()
     serializer_class=ClientSerializer
 
-print(">>> AppointmentView class loaded")
 
 class AppointmentView(generics.ListCreateAPIView):
     queryset=Consultants.objects.all()
     serializer_class=AppointmentSerializer
-    def list(self,request,*args,**kwargs):
-        data=super().list(request,*args,**kwargs)
-        print(data.data,'data print >>>>>>>>>>')
-        return Response('resoponse')
+    
     
 
 # class BookAppointmentView(APIView):
